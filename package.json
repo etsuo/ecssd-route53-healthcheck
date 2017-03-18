@@ -1,0 +1,32 @@
+{
+  "name": "ecssd-route53-healthcheck",
+  "version": "0.1.0",
+  "description": "AWS ECS Service Discovery Health Check of Route53 - cleans up dangling entries.",
+  "main": "index.js",
+  "scripts": {
+    "jasmine": "jasmine",
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/etsuo/ecssd-route53-healthcheck.git"
+  },
+  "keywords": [
+    "AWS",
+    "ECS",
+    "Service",
+    "Discovery",
+    "Route53",
+    "Docker"
+  ],
+  "author": "Jean-Pierre E. Poveda",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/etsuo/ecssd-route53-healthcheck/issues"
+  },
+  "homepage": "https://github.com/etsuo/ecssd-route53-healthcheck#readme",
+  "devDependencies": {
+    "jasmine": "^2.5.3",
+    "jasmine-spec-reporter": "^3.2.0"
+  }
+}
