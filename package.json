@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "deploy": "node ./scripts/deploy.js",
+    "eslint": "eslint",
     "jasmine": "jasmine",
+    "lint": "eslint *.js",
     "test": "jasmine"
   },
   "deployGlob": {
@@ -50,6 +52,7 @@
     "cli-spinner": "^0.2.6",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
+    "eslint": "^3.18.0",
     "glob": "^7.1.1",
     "inquirer": "^3.0.6",
     "jasmine": "^2.5.3",
