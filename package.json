@@ -1,0 +1,68 @@
+{
+  "name": "ecssd-route53-healthcheck",
+  "version": "1.0.0",
+  "description": "AWS ECS Service Discovery Health Check of Route53 - cleans up dangling entries.",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "node ./scripts/deploy.js",
+    "eslint": "eslint",
+    "jasmine": "jasmine",
+    "lint": "eslint *.js",
+    "test": "jasmine"
+  },
+  "deployGlob": {
+    "include": "**/*",
+    "ignore": [
+      "*.spec.js",
+      "LICENSE",
+      "README.md",
+      "package.json",
+      "scripts/**",
+      "spec/**",
+      "npm-debug.log"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/etsuo/ecssd-route53-healthcheck.git"
+  },
+  "keywords": [
+    "AWS",
+    "ECS",
+    "Service",
+    "Discovery",
+    "Route53",
+    "Docker"
+  ],
+  "author": "Jean-Pierre E. Poveda",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/etsuo/ecssd-route53-healthcheck/issues"
+  },
+  "homepage": "https://github.com/etsuo/ecssd-route53-healthcheck#readme",
+  "devDependencies": {
+    "@types/adm-zip": "^0.4.31",
+    "@types/aws-sdk": "0.0.42",
+    "@types/colors": "^1.1.1",
+    "@types/glob": "^5.0.30",
+    "@types/inquirer": "0.0.32",
+    "@types/jasmine": "^2.5.46",
+    "@types/shelljs": "^0.7.0",
+    "adm-zip": "^0.4.7",
+    "cli-spinner": "^0.2.6",
+    "cli-table": "^0.3.1",
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "eslint": "^3.18.0",
+    "glob": "^7.1.1",
+    "inquirer": "^3.0.6",
+    "jasmine": "^2.5.3",
+    "jasmine-spec-reporter": "^3.2.0",
+    "node-zip": "^1.1.1",
+    "progress": "^1.1.8",
+    "shelljs": "^0.7.7"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.28.0"
+  }
+}
