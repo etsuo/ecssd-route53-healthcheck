@@ -12,6 +12,7 @@ const program = require('commander');
 const ProgressBar = require('progress');
 const shell = require('shelljs');
 const Spinner = require('cli-spinner').Spinner;
+const Table = require('cli-table');
 const Zip = require('node-zip');
 
 AWS.config.apiVersions = {
@@ -200,7 +201,7 @@ class Deploy {
         // the function doesn't exist yet
         inquirer
           .prompt([{
-            message: `Lambda function '${this.config.functionName}' does not exist, are you sure you want to create it?`,
+            message: `Lambda function '${this.config.functionName}' does not exist, are you sure you want to create it (-f)?`,
             type: 'confirm',
             name: 'confirmCreate',
             when: !!!program.force
@@ -219,10 +220,13 @@ class Deploy {
           .then(this.createLambdaFunction.bind(this))
           .then((result) => {
             if (spinner) spinner.stop(CLEAR_SPINNER);
+
             console.log(`Done creating Lambda function ${result.FunctionName}`.green);
-            console.log(`Version: ${result.Version}`.green);
-            console.log(`Arn: ${result.FunctionArn}`.green);
-            console.log(`SHA256: ${result.CodeSha256}`.green);
+            let table = new Table({});
+            table.push(['Version', result.Version]);
+            table.push(['Arn', result.FunctionArn]);
+            table.push(['SHA256', result.CodeSha256]);
+            console.log(table.toString());
 
             resolve(result);
           })
@@ -239,9 +243,11 @@ class Deploy {
           .then((result) => {
             spinner.stop(CLEAR_SPINNER);
             console.log(`Done updating Lambda function ${result.FunctionName}`.green);
-            console.log(`Version: ${result.Version}`.green);
-            console.log(`Arn: ${result.FunctionArn}`.green);
-            console.log(`SHA256: ${result.CodeSha256}`.green);
+            let table = new Table({});
+            table.push(['Version', result.Version]);
+            table.push(['Arn', result.FunctionArn]);
+            table.push(['SHA256', result.CodeSha256]);
+            console.log(table.toString());
 
             resolve(result);
           })
@@ -290,7 +296,7 @@ class Deploy {
       inquirer
         .prompt([
           {
-            message: `Deploy Lambda function 'ecssd-route53-healthcheck' to AWS using profile '${AWS.config.credentials.profile}'${AWS.config.region || program.region ? ` in region '${AWS.config.region || program.region}'` : ''}?`,
+            message: `Deploy Lambda function 'ecssd-route53-healthcheck' to AWS using profile '${AWS.config.credentials.profile}'${AWS.config.region || program.region ? ` in region '${AWS.config.region || program.region}'` : ''} (-f)?`,
             type: 'confirm',
             name: 'confirm',
             when: !!!program.force,
@@ -299,7 +305,7 @@ class Deploy {
             }
           },
           {
-            message: 'What region?',
+            message: 'What region (-R)?',
             type: 'list',
             name: 'region',
             when: () => !AWS.config.region && !!!program.region,
@@ -321,7 +327,7 @@ class Deploy {
             default: 3
           },
           {
-            message: 'Function Name?',
+            message: 'Function Name (-n)?',
             type: 'input',
             name: 'functionName',
             when: !!!program.functionName,
@@ -330,7 +336,7 @@ class Deploy {
             },
             default: 'ecs_servicediscovery_route53_healthcheck'
           }, {
-            message: 'Role?',
+            message: 'Role? (-r)',
             type: 'list',
             name: 'role',
             when: !!!program.role,
@@ -359,7 +365,7 @@ class Deploy {
 
         let roles = [];
         for (let role of data.Roles) {
-          roles.push({name: role.RoleName, value: role.Arn})
+          roles.push({name: `${role.RoleName} (${role.Arn})`, value: role.Arn})
         }
         resolve(roles);
       });

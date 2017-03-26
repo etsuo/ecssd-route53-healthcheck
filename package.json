@@ -1,6 +1,6 @@
 {
   "name": "ecssd-route53-healthcheck",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "AWS ECS Service Discovery Health Check of Route53 - cleans up dangling entries.",
   "main": "index.js",
   "scripts": {
@@ -50,6 +50,7 @@
     "@types/shelljs": "^0.7.0",
     "adm-zip": "^0.4.7",
     "cli-spinner": "^0.2.6",
+    "cli-table": "^0.3.1",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "eslint": "^3.18.0",
